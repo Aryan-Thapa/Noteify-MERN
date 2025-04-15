@@ -5,10 +5,12 @@ import Signup from "./pages/signup";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import DashboardLayout from "./layouts/DashboardLayout";
+import Landing from "./pages/Landing";
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
