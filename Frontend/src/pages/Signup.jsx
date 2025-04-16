@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "../api/axios";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
-import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/Logo.png";
+import { useNavigate } from "react-router-dom";
+import NoteifyLogo from "../assets/NoteifyLogo.png";
+import { useDarkMode } from "../context/DarkModeContext";
 
 import {
   EyeIcon,
@@ -24,11 +25,11 @@ const getPasswordStrength = (password) => {
 };
 
 const Signup = () => {
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Signup = () => {
       className={`${
         darkMode
           ? "bg-gradient-to-br from-[#1f1c2c] to-[#928dab]"
-          : "bg-gradient-to-br from-gray-100 to-white"
+          : "bg-gradient-to-br from-[#fdfcfb] to-[#e2d1c3]"
       } min-h-screen flex items-center justify-center transition-all duration-300`}
     >
       <div
@@ -68,7 +69,7 @@ const Signup = () => {
         {/* Dark Mode Toggle */}
         <div className="flex justify-end mb-4">
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleDarkMode}
             className="p-2 rounded-full bg-orange-400 text-white hover:bg-orange-500 transition"
           >
             {darkMode ? (
@@ -81,7 +82,7 @@ const Signup = () => {
 
         {/* Logo */}
         <div className="flex justify-center mb-6">
-          <img src={Logo} alt="Noteify Logo" className="h-20" />
+          <img src={NoteifyLogo} alt="Noteify Logo" className="h-20" />
         </div>
 
         <h2
@@ -204,9 +205,9 @@ const Signup = () => {
         <div className="text-center mt-4">
           <p className={`text-sm ${darkMode ? "text-white" : "text-gray-700"}`}>
             Already have an account?{" "}
-            <Link to="/login" className="text-orange-400 hover:opacity-80">
+            <a href="/login" className="text-orange-300 hover:underline">
               Log in
-            </Link>
+            </a>
           </p>
         </div>
       </div>
