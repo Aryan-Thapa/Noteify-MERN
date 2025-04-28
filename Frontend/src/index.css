@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.slick-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #fb923c #0000;
+    /* orange-400 thumb, transparent track */
+}
+
+.slick-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.slick-scrollbar::-webkit-scrollbar-thumb {
+    background: #fb923c;
+    border-radius: 8px;
+}
+
+.slick-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
