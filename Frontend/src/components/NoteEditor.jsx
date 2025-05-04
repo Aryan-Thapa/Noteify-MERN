@@ -59,16 +59,16 @@ const NoteEditor = ({
   return (
     <div className="flex-1 flex items-center justify-center p-0 overflow-y-auto">
       {editNote ? (
-        <div className={`w-[900px] h-[calc(100vh-32px)] mx-auto bg-white/80 dark:bg-white/10 rounded-xl shadow p-10 border ${darkMode ? "bg-white/10 border-white/20" : "bg-white border-gray-100"} flex flex-col justify-start`} style={{ minHeight: '90vh' }}>
+        <div className={`w-full max-w-[900px] h-[calc(100vh-32px)] mx-auto bg-white/80 dark:bg-white/10 rounded-xl shadow p-2 sm:p-4 md:p-10 border ${darkMode ? "bg-white/10 border-white/20" : "bg-white border-gray-100"} flex flex-col justify-start`} style={{ minHeight: '90vh' }}>
           <input
-            className={`w-full text-3xl font-bold mb-2 bg-transparent outline-none ${darkMode ? "text-white" : "text-gray-900"}`}
+            className={`w-full text-2xl sm:text-3xl font-bold mb-2 bg-transparent outline-none ${darkMode ? "text-white" : "text-gray-900"}`}
             value={editNote.title}
             onChange={e => handleEditChange("title", e.target.value)}
             placeholder="Title"
             disabled={mutating}
           />
           {/* Formatting Toolbar */}
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex flex-wrap gap-2 mb-2">
             <button
               type="button"
               className={`px-2 py-1 rounded border bg-gray-100 dark:bg-white/10 border-gray-200 dark:border-white/20 text-lg font-bold shadow-sm transition-all duration-150 hover:bg-orange-100 dark:hover:bg-orange-400/20 hover:ring-2 hover:ring-orange-200 dark:hover:ring-orange-400/40 active:bg-orange-200 dark:active:bg-orange-400/30 focus:outline-none ${darkMode ? "text-white" : "text-black"}`}
@@ -120,14 +120,16 @@ const NoteEditor = ({
             value={editNote.content}
             onChange={e => handleEditChange("content", e.target.value)}
             placeholder="Write your note..."
-            style={{ minHeight: '200px', fontSize: fontSize, fontWeight: isBold ? 'bold' : 'normal', fontStyle: isItalic ? 'italic' : 'normal' }}
+            style={{ fontSize: fontSize, fontWeight: isBold ? 'bold' : 'normal', fontStyle: isItalic ? 'italic' : 'normal' }}
             disabled={mutating}
+            minLength={0}
+            rows={4}
           />
           {/* AI Summary Output */}
           {summary && (
-            <div className={`mt-6 p-4 rounded bg-orange-50 dark:bg-orange-400/10 border border-orange-200 dark:border-orange-400/30 ${darkMode ? "text-white/90" : "text-black"}`}>
-              <div className="font-semibold mb-1 text-orange-500">AI Summary:</div>
-              <div>{summary}</div>
+            <div className={`mt-4 sm:mt-6 p-2 sm:p-4 rounded bg-orange-50 dark:bg-orange-400/10 border border-orange-200 dark:border-orange-400/30 ${darkMode ? "text-white/90" : "text-black"}`}>
+              <div className="font-semibold mb-1 text-orange-500 text-sm sm:text-base">AI Summary:</div>
+              <div className="text-sm sm:text-base">{summary}</div>
             </div>
           )}
           {summaryError && (

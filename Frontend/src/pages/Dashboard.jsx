@@ -152,15 +152,17 @@ const Dashboard = () => {
         filterDropdownRef={filterDropdownRef}
         menuDropdownRef={menuDropdownRef}
       />
-      <NoteEditor
-        editNote={editNote}
-        handleEditChange={handleEditChange}
-        showDeleteModal={showDeleteModal}
-        confirmDelete={confirmDelete}
-        cancelDelete={cancelDelete}
-        darkMode={darkMode}
-        mutating={mutating}
-      />
+      <div className="flex-1 flex items-center justify-center p-0 overflow-y-auto md:pt-0 pt-24">
+        <NoteEditor
+          editNote={editNote}
+          handleEditChange={handleEditChange}
+          showDeleteModal={showDeleteModal}
+          confirmDelete={confirmDelete}
+          cancelDelete={cancelDelete}
+          darkMode={darkMode}
+          mutating={mutating}
+        />
+      </div>
     </div>
   );
 };
