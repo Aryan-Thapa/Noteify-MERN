@@ -5,6 +5,7 @@ import { setCredentials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import NoteifyLogo from "../assets/NoteifyLogo.png";
 import { useDarkMode } from "../context/DarkModeContext";
+import { Toaster, toast } from 'react-hot-toast';
 
 import {
   EyeIcon,
@@ -43,8 +44,11 @@ const Signup = () => {
         password,
       });
       dispatch(setCredentials(res.data));
+      toast.success("Account created! Welcome to Noteify.");
       navigate("/dashboard");
     } catch (error) {
+      const msg = error?.response?.data?.message || "User already exists or registration failed.";
+      toast.error(msg);
       console.error(error);
     }
   };
@@ -59,6 +63,7 @@ const Signup = () => {
           : "bg-gradient-to-br from-[#fdfcfb] to-[#e2d1c3]"
       } min-h-screen flex items-center justify-center transition-all duration-300`}
     >
+      <Toaster position="top-right" toastOptions={{ duration: 3500 }} />
       <div
         className={`backdrop-blur-md ${
           darkMode

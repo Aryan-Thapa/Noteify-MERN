@@ -5,6 +5,7 @@ import { setCredentials } from "../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import NoteifyLogo from "../assets/NoteifyLogo.png";
 import { useDarkMode } from "../context/DarkModeContext";
+import { Toaster, toast } from 'react-hot-toast';
 
 import {
   EyeIcon,
@@ -26,8 +27,11 @@ const Login = () => {
     try {
       const res = await axios.post("/auth/login", { email, password });
       dispatch(setCredentials(res.data));
+      toast.success("Logged in successfully!");
       navigate("/dashboard");
     } catch (error) {
+      const msg = error?.response?.data?.message || "Invalid credentials or user does not exist.";
+      toast.error(msg);
       console.error(error);
     }
   };
@@ -40,6 +44,7 @@ const Login = () => {
           : "bg-gradient-to-br from-[#fdfcfb] to-[#e2d1c3]"
       } min-h-screen flex items-center justify-center transition-all duration-300`}
     >
+      <Toaster position="top-right" toastOptions={{ duration: 3500 }} />
       <div
         className={`backdrop-blur-md ${
           darkMode
